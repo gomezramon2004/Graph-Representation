@@ -21,3 +21,11 @@ void Graph::addEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix, st
     adj_list[u].push_back(v);
     adj_list[v].push_back(u);
 }
+
+// Remove an edge to the graph
+void Graph::removeEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix, std::list<int>* &adj_list) {
+    adj_matrix[u][v] = false;
+    adj_matrix[v][u] = false;
+    adj_list[u].remove(v);
+    adj_list[v].remove(u);
+}
