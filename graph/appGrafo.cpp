@@ -1,5 +1,6 @@
 #include "appGrafo.hpp"
 
+// Deep First Search - Recursive Function
 void Graph::recursiveDFS(int currentNode, std::vector<bool>& visited, std::vector<std::vector<bool>>& adj_matrix) {
     visited[currentNode] = true;
     std::cout << currentNode << " ";
@@ -40,8 +41,33 @@ void Graph::removeEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix,
     adj_list[v].remove(u);
 }
 
+// Deep First Search - Base Function
 void Graph::DFS(int start, std::vector<std::vector<bool>>& adj_matrix) {
     std::vector<bool> visited(adj_matrix.size(), false);
     recursiveDFS(start, visited, adj_matrix);
+    std::cout << std::endl;
+}
+
+// Breadth First Search
+void Graph::BFS(int currentNode, std::list<int>* &adj_list) {
+    std::vector<bool> visited(adj_list->size(), false);
+    std::queue<int> q;
+
+    visited[currentNode] = true;
+    q.push(currentNode);
+    std::list<int>::iterator i;
+
+    while (!q.empty()) {
+        currentNode = q.front();
+        std::cout << currentNode << " ";
+
+        for (i = adj_list[currentNode].begin(); i != adj_list[currentNode].end(); ++i) {
+            if (!visited[*i]) {
+                visited[*i] = true;
+                q.push(*i);
+            }
+        }
+    }
+
     std::cout << std::endl;
 }
