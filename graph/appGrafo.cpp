@@ -1,5 +1,15 @@
 #include "appGrafo.hpp"
-#include <iostream>
+
+void Graph::recursiveDFS(int currentNode, std::vector<bool>& visited, std::vector<std::vector<bool>>& adj_matrix) {
+    visited[currentNode] = true;
+    std::cout << currentNode << " ";
+
+    for (size_t i = 0; i < adj_matrix.size(); ++i) {
+        if (adj_matrix[currentNode][i] && !visited[i]) {
+            recursiveDFS(i, visited, adj_matrix);
+        }
+    }
+}
 
 // Constructor of graph
 void Graph::loadGraph(int n, int m, std::vector<std::vector<bool>>& adj_matrix, std::list<int>* &adj_list) {
@@ -28,4 +38,10 @@ void Graph::removeEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix,
     adj_matrix[v][u] = false;
     adj_list[u].remove(v);
     adj_list[v].remove(u);
+}
+
+void Graph::DFS(int start, std::vector<std::vector<bool>>& adj_matrix) {
+    std::vector<bool> visited(adj_matrix.size(), false);
+    recursiveDFS(start, visited, adj_matrix);
+    std::cout << std::endl;
 }
