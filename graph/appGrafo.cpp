@@ -60,6 +60,7 @@ void Graph::BFS(int currentNode, std::list<int>* &adj_list) {
     while (!q.empty()) {
         currentNode = q.front();
         std::cout << currentNode << " ";
+        q.pop();
 
         for (i = adj_list[currentNode].begin(); i != adj_list[currentNode].end(); ++i) {
             if (!visited[*i]) {
