@@ -14,4 +14,3 @@ class Graph {
         void DFS(int start, std::vector<std::vector<bool>>& adj_matrix);
         void BFS(int start,  std::list<int>* &adj_list);
 };
-
