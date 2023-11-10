@@ -1,5 +1,13 @@
 #include "appGrafo.hpp"
 
+// Add an edge to the graph. Remember, this is a non-directed graph, so U <-> V
+void Graph::addEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix, std::list<int>* &adj_list) {
+    adj_matrix[u][v] = true;
+    adj_matrix[v][u] = true;
+    adj_list[u].push_back(v);
+    adj_list[v].push_back(u);
+}
+
 // Deep First Search - Recursive Function
 void Graph::recursiveDFS(int currentNode, std::vector<bool>& visited, std::vector<std::vector<bool>>& adj_matrix) {
     visited[currentNode] = true;
@@ -23,22 +31,6 @@ void Graph::loadGraph(int n, int m, std::vector<std::vector<bool>>& adj_matrix, 
         std::cin >> u >> v;
         addEdge(u, v, adj_matrix, adj_list);
     }
-}
-
-// Add an edge to the graph
-void Graph::addEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix, std::list<int>* &adj_list) {
-    adj_matrix[u][v] = true;
-    adj_matrix[v][u] = true;
-    adj_list[u].push_back(v);
-    adj_list[v].push_back(u);
-}
-
-// Remove an edge to the graph
-void Graph::removeEdge(int u, int v, std::vector<std::vector<bool>>& adj_matrix, std::list<int>* &adj_list) {
-    adj_matrix[u][v] = false;
-    adj_matrix[v][u] = false;
-    adj_list[u].remove(v);
-    adj_list[v].remove(u);
 }
 
 // Deep First Search - Base Function
